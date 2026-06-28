@@ -1,0 +1,15 @@
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\bin\Debug\net10.0\TheProject.exe
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\bin\Debug\net10.0\TheProject.deps.json
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\bin\Debug\net10.0\TheProject.runtimeconfig.json
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\bin\Debug\net10.0\TheProject.dll
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\bin\Debug\net10.0\TheProject.pdb
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.AssemblyInfoInputs.cache
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.AssemblyInfo.cs
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.csproj.CoreCompileInputs.cache
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.sourcelink.json
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.dll
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\refint\TheProject.dll
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.pdb
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\TheProject.genruntimeconfig.cache
+C:\Users\Leone\kubernetesHarjoitusta\TheProject\obj\Debug\net10.0\ref\TheProject.dll
