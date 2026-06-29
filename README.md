@@ -5,5 +5,5 @@ Chapter 2
 
 [1.2](https://github.com/Aulanko/KubernetesSubmissions/tree/1.2/TheProject)
 
-[1.3](https://github.com/Aulanko/KubernetesSubmissions/tree/1.3/TheProject)
+[1.3](https://github.com/Aulanko/KubernetesSubmissions/tree/1.3/LogOutput/RandomWordLogger)
 
