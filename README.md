@@ -3,3 +3,7 @@ Chapter 2
 
 [1.1](https://github.com/Aulanko/KubernetesSubmissions/tree/master/LogOutput/RandomWordLogger)
 
+[1.2](https://github.com/Aulanko/KubernetesSubmissions/tree/1.2/TheProject)
+
+[1.3](https://github.com/Aulanko/KubernetesSubmissions/tree/1.3/TheProject)
+
