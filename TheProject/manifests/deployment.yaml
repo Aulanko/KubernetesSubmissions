@@ -17,3 +17,6 @@ spec:
       containers:
         - name: todo-app
           image: icelyx/the-project-web-server
+          env:
+            - name: PORT
+              value: "3001"
