@@ -11,6 +11,7 @@ RUN dotnet publish LogOutput.csproj -c Release -o /app/publish
 # Runtime stage - Use ASP.NET Core runtime (includes Microsoft.AspNetCore.App)
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
+ENV ASPNETCORE_HTTP_PORTS=3000
 
 COPY --from=build /app/publish .
 

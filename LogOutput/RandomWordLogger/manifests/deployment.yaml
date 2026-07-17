@@ -16,3 +16,5 @@ spec:
       containers:
         - name: logoutput
           image: icelyx/logoutput
+          ports:
+           - containerPort: 8080
