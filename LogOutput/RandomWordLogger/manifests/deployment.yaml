@@ -2,19 +2,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output-app
+  name: writer-and-reader-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: logoutput
+      app: writer
   template:
     metadata:
       labels:
-        app: logoutput
+        app: writer
     spec:
       containers:
-        - name: logoutput
-          image: icelyx/logoutput
+        - name: writer
+          image: icelyx/writer
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
           ports:
            - containerPort: 8080
+        - name: reader
+          image: icelyx/reader
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
+      volumes:
+        - name:  shared-logs
+          emptyDir: {}

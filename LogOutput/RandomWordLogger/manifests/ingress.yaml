@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: logoutput-ingress
+  name: writer-ingress
 spec:
   ingressClassName: traefik
   rules:
@@ -18,6 +18,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: logoutput-service
+            name: writer-service
             port:
               number: 1234
