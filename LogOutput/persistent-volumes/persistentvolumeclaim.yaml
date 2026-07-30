@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim-for-logoutput-and-ping-pong
+spec:
+  storageClassName: pv-for-logoutput-and-ping-pong
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+

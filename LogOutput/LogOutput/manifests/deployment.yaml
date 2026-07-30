@@ -7,13 +7,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: writer
+      app: reader
   template:
     metadata:
       labels:
-        app: writer
+        app: reader
     spec:
       containers:
+
         - name: writer
           image: icelyx/writer
           volumeMounts:
@@ -21,11 +22,22 @@ spec:
               mountPath: /usr/src/app/files
           ports:
            - containerPort: 8080
+
+
         - name: reader
           image: icelyx/reader
           volumeMounts:
             - name: shared-logs
               mountPath: /usr/src/app/files
+            - name: shared-volume-for-logoutput-and-ping-pong
+              mountPath: /usr/src/app/counter
+          ports:
+           - containerPort: 3000
+
       volumes:
+        - name: shared-volume-for-logoutput-and-ping-pong
+          persistentVolumeClaim:
+            claimName: pv-claim-for-logoutput-and-ping-pong
+
         - name:  shared-logs
           emptyDir: {}

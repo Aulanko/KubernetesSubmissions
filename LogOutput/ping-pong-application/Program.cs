@@ -1,30 +1,42 @@
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+const string filePath = "/usr/src/app/counter/log.txt";
+Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
 var counter = 0;
+if (File.Exists(filePath))
+{
+    var existingLines = File.ReadAllLines(filePath);
+    if (existingLines.Length > 0)
+    {
+        var lastLine = existingLines[^1];
+        var parts = lastLine.Split(':');
+        if (parts.Length == 2 && int.TryParse(parts[1].Trim(), out var restored))
+        {
+            counter = restored;
+        }
+    }
+}
 
-app.MapGet("/pingpong", (HttpContext ctx) =>
+app.MapGet("/pingpong", async (HttpContext ctx) =>
 {
     ctx.Response.Headers.CacheControl = "no-store";
 
-    string answer = "pong "+counter;
-    counter++;
+    var newCount = Interlocked.Increment(ref counter);
+    var answer = "pong " + newCount;
+
+    var line = $"Ping / Pongs: {newCount}";
+    await File.AppendAllTextAsync(filePath, line + Environment.NewLine);
+
     return answer;
 })
 .WithName("pingpong");
 
 app.Run();
-

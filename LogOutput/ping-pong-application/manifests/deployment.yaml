@@ -13,9 +13,17 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: shared-volume-for-logoutput-and-ping-pong
+          persistentVolumeClaim:
+            claimName: pv-claim-for-logoutput-and-ping-pong
+            
       containers:
         - name: pingpong
           image: icelyx/pingpong
+          volumeMounts:
+            - name: shared-volume-for-logoutput-and-ping-pong
+              mountPath: /usr/src/app/counter
           ports:
             - containerPort: 8080
 
