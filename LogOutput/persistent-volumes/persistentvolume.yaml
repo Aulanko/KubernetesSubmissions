@@ -20,6 +20,6 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-            - k3d-k3s-default-server-0
+            - k3d-mycluster-server-0
             
     

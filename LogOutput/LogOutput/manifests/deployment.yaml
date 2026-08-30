@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,30 +13,15 @@ spec:
         app: reader
     spec:
       containers:
-
-        - name: writer
-          image: icelyx/writer
-          volumeMounts:
-            - name: shared-logs
-              mountPath: /usr/src/app/files
-          ports:
-           - containerPort: 8080
-
-
         - name: reader
-          image: icelyx/reader
+          image: reader:latest
+          imagePullPolicy: Never
           volumeMounts:
-            - name: shared-logs
-              mountPath: /usr/src/app/files
-            - name: shared-volume-for-logoutput-and-ping-pong
+            - name: shared-volume
               mountPath: /usr/src/app/counter
           ports:
-           - containerPort: 3000
-
+            - containerPort: 3000
       volumes:
-        - name: shared-volume-for-logoutput-and-ping-pong
+        - name: shared-volume
           persistentVolumeClaim:
             claimName: pv-claim-for-logoutput-and-ping-pong
-
-        - name:  shared-logs
-          emptyDir: {}

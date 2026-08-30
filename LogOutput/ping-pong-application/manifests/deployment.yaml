@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,17 +12,16 @@ spec:
       labels:
         app: pingpong
     spec:
-      volumes:
-        - name: shared-volume-for-logoutput-and-ping-pong
-          persistentVolumeClaim:
-            claimName: pv-claim-for-logoutput-and-ping-pong
-            
       containers:
         - name: pingpong
-          image: icelyx/pingpong
+          image: pingpong:latest
+          imagePullPolicy: Never
           volumeMounts:
-            - name: shared-volume-for-logoutput-and-ping-pong
+            - name: shared-volume
               mountPath: /usr/src/app/counter
           ports:
             - containerPort: 8080
-
+      volumes:
+        - name: shared-volume
+          persistentVolumeClaim:
+            claimName: pv-claim-for-logoutput-and-ping-pong

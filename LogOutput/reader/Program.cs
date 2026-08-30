@@ -1,22 +1,22 @@
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-const string filePath = "/usr/src/app/files/log.txt";
-const string PingPongFilePath = "usr/src/app/counter/log.txt";
+const string PingPongFilePath = "/usr/src/app/counter/log.txt";
 
-app.MapGet("/", async()=> 
+app.MapGet("/", async () =>
 {
-    if (!File.Exists(filePath) || !File.Exists(PingPongFilePath))
+    if (!File.Exists(PingPongFilePath))
     {
-    return Results.Json( new { status = "Waiting for the file.."});
+        return Results.Json(new { status = "Waiting for the file.." });
     }
-    var lines = await(File.ReadAllLinesAsync(filePath));
-    var lastLine = lines.Length >0? lines[^1]:string.Empty;
-    var pings = await(File.ReadAllLinesAsync(PingPongFilePath));
-    var lastPing = pings.Length >0? pings[^1]:string.Empty;
-    return Results.Text($"{lastLine}\n{lastPing}");
 
+    var lines = await File.ReadAllLinesAsync(PingPongFilePath);
+    var lastLine = lines.LastOrDefault() ?? "Ping / Pongs: 0";
+
+    var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+    var randomId = Guid.NewGuid().ToString();
+
+    return Results.Text($"{timestamp}: {randomId}.\n{lastLine}");
 });
 
 app.Run();
