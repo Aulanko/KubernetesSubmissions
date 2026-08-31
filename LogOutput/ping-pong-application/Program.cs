@@ -39,4 +39,10 @@ app.MapGet("/pingpong", async (HttpContext ctx) =>
 })
 .WithName("pingpong");
 
+app.MapGet("/count", ()=>{
+   
+    var current = System.Threading.Volatile.Read(ref counter);
+    return Results.Text($"Ping / Pongs:{current}");
+});
+
 app.Run();

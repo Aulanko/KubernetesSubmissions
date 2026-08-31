@@ -1,29 +1,36 @@
+using System.Net.Http;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
+
+var http = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
 const string SharedCounterFile = "/usr/src/app/counter/log.txt";
 Directory.CreateDirectory(Path.GetDirectoryName(SharedCounterFile)!);
 
 app.MapGet("/", async () =>
 {
-    var pingCount = 0;
+    string pingpongLine = "Ping / Pongs: 0";
+    
 
-    if (File.Exists(SharedCounterFile))
-    {
-        var lines = await File.ReadAllLinesAsync(SharedCounterFile);
-        var lastLine = lines.LastOrDefault();
-
-        if (!string.IsNullOrWhiteSpace(lastLine) && lastLine.StartsWith("Ping / Pongs:"))
+    try{
+       
+        var resp = await http.GetAsync("http://pingpong-service:2345/count");
+        if (resp.IsSuccessStatusCode)
         {
-            var value = lastLine.Replace("Ping / Pongs:", "").Trim();
-            int.TryParse(value, out pingCount);
+            pingpongLine = (await resp.Content.ReadAsStringAsync()).Trim();
         }
+
+    }catch(Exception ex){
+    pingpongLine = $"error: {ex.Message}";
     }
+
+    
 
     var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
     var randomId = Guid.NewGuid().ToString();
 
-    return Results.Text($"{timestamp}: {randomId}.\nPing / Pongs: {pingCount}");
+    return Results.Text($"{timestamp}: {randomId}.\n{pingpongLine}");
 });
 
 app.Run();

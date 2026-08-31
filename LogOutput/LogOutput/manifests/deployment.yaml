@@ -16,12 +16,7 @@ spec:
         - name: reader
           image: reader:latest
           imagePullPolicy: Never
-          volumeMounts:
-            - name: shared-volume
-              mountPath: /usr/src/app/counter
+         
           ports:
             - containerPort: 3000
-      volumes:
-        - name: shared-volume
-          persistentVolumeClaim:
-            claimName: pv-claim-for-logoutput-and-ping-pong
+    
