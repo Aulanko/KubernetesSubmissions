@@ -26,27 +26,125 @@ app.MapGet("/", () =>
             body {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 min-height: 100vh;
                 margin: 0;
+                padding: 24px;
                 font-family: Arial, sans-serif;
                 background: #f5f5f5;
             }
+            .container {
+                width: 100%;
+                max-width: 900px;
+                background: #fff;
+                padding: 18px;
+                border-radius: 10px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            }
             h1 {
-                margin-bottom: 20px;
+                margin: 0 0 12px 0;
+            }
+            .image-wrap {
+                text-align: center;
+                margin-bottom: 16px;
             }
             img {
-                max-width: 90%;
+                max-width: 100%;
                 height: auto;
                 border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            }
+            .todo-input {
+                display:flex;
+                gap:8px;
+                margin: 12px 0;
+            }
+            input[type="text"] {
+                flex:1;
+                padding: 10px 12px;
+                font-size: 14px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+            button {
+                padding: 10px 14px;
+                font-size: 14px;
+                border-radius: 6px;
+                border: none;
+                background: #007bff;
+                color: white;
+                cursor: pointer;
+            }
+            button:disabled {
+                background: #9fc1ff;
+                cursor: default;
+            }
+            .meta {
+                font-size: 13px;
+                color: #666;
+                margin-top: 8px;
+            }
+            ul.todo-list {
+                margin: 12px 0 0 0;
+                padding-left: 18px;
+            }
+            ul.todo-list li {
+                margin: 6px 0;
             }
         </style>
     </head>
     <body>
+      <div class="container">
         <h1>Todo App</h1>
-        <img src="/image" alt="Random image">
+
+        <div class="image-wrap">
+          <img src="/image" alt="Random image">
+        </div>
+
+        <div class="todo-input">
+          <input id="todoInput" type="text" maxlength="140" placeholder="Write a todo (max 140 chars)">
+          <button id="sendBtn" disabled>Send</button>
+        </div>
+        <div class="meta">
+          <span id="charCount">140</span> characters remaining
+        </div>
+
+        <h2>Todos</h2>
+        <ul class="todo-list" id="todoList">
+          <li>Buy milk</li>
+          <li>Walk the dog</li>
+          <li>Write blog post about Kubernetes</li>
+        </ul>
+      </div>
+
+      <script>
+        (function(){
+          const input = document.getElementById('todoInput');
+          const btn = document.getElementById('sendBtn');
+          const count = document.getElementById('charCount');
+          const max = 140;
+
+          function update() {
+            const remaining = max - input.value.length;
+            count.textContent = remaining;
+            // Enable send only when there's some text (not required by your task to actually send)
+            btn.disabled = input.value.trim().length === 0;
+          }
+
+          input.addEventListener('input', update);
+          // initialize
+          update();
+
+          // Send button currently does nothing functional (per requirement)
+          btn.addEventListener('click', function(e){
+            e.preventDefault();
+            // Visual feedback only:
+            btn.textContent = 'Sent!';
+            setTimeout(() => btn.textContent = 'Send', 800);
+          });
+        })();
+      </script>
     </body>
     </html>
     """;
