@@ -24,3 +24,5 @@ Chapter 2
 [1.10](https://github.com/Aulanko/KubernetesSubmissions/tree/1.10/LogOutput/)
 
 [1.11](https://github.com/Aulanko/KubernetesSubmissions/tree/1.11/LogOutput/)
+
+[1.12](https://github.com/Aulanko/KubernetesSubmissions/tree/1.11/LogOutput/)
