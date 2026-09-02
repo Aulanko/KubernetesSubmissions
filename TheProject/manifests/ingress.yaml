@@ -6,12 +6,20 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - http:
+  - host: todo.localhost
+    http:
       paths:
-      - path: /todo
+      - path: /todo-backend
         pathType: Prefix
         backend: 
           service:
-            name: todo-app
+            name: todo-backend
             port: 
               number: 1234
+      - path: /
+        pathType: Prefix
+        backend: 
+          service:
+            name: todo-frontend
+            port: 
+              number: 3456

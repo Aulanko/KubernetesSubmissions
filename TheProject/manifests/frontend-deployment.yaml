@@ -1,0 +1,26 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+        - name: todo-frontend
+          image: todo-frontend:latest
+          imagePullPolicy: Never
+          env:
+            - name: PORT
+              value: "3001"
+              
+        
+

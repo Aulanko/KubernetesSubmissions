@@ -1,23 +1,23 @@
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app
+  name: todo-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: todo-app
+      app: todo-backend
   template:
     metadata:
       labels:
-        app: todo-app
+        app: todo-backend
     spec:
       containers:
-        - name: todo-app
-          image: todo-app:latest
+        - name: todo-backend
+          image: todo-backend:latest
           imagePullPolicy: Never
+          ports:
+            - containerPort: 3002
           env:
             - name: PORT
-              value: "3001"
+              value: "3002"

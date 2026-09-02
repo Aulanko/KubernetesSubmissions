@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+h1 { margin: 0 0 12px 0; }
+.image-wrap { text-align: center; margin-bottom: 16px; }
+img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.todo-input { display:flex; gap:8px; margin: 12px 0; }
+input[type="text"] { flex:1; padding: 10px 12px; font-size: 14px; border: 1px solid #ddd; border-radius: 6px; }
+button { padding: 10px 14px; font-size: 14px; border-radius: 6px; border: none; background: #007bff; color: white; cursor: pointer; }
+button:disabled { background: #9fc1ff; cursor: default; }
+.meta { font-size: 13px; color: #666; margin-top: 8px; }
+ul.todo-list { margin: 12px 0 0 0; padding-left: 18px; }
+ul.todo-list li { margin: 6px 0; }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i+FmXy8PAdk=",
+  "dgSpecHash": "O05bN/qSG/s=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Leone\\kubernetesHarjoitusta\\LogOutput\\reader\\reader.csproj",
+  "projectFilePath": "/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/LogOutput/reader/reader.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
