@@ -1,0 +1,10 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-output-config
+  namespace: exercises
+data:
+  information.txt: |
+    This is a ConfigMap-provided file for the Log Output application.
+  MESSAGE: "Hello from ConfigMap"

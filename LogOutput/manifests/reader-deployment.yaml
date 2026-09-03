@@ -17,7 +17,24 @@ spec:
         - name: reader
           image: reader:latest
           imagePullPolicy: Never
-         
           ports:
             - containerPort: 3000
+            
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
+
+          volumeMounts:
+              - name: config-volume
+                mountPath: /etc/config-volume
+                readOnly: true
+      volumes:
+        - name: config-volume
+          configMap:
+            name: log-output-config
+         
+        
     

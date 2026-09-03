@@ -29,8 +29,10 @@ app.MapGet("/", async () =>
 
     var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
     var randomId = Guid.NewGuid().ToString();
+    var configMessage = Environment.GetEnvironmentVariable("MESSAGE") ?? "No message found in environment variable.";
+    var fileContent = await File.ReadAllTextAsync("/etc/config-volume/information.txt");
 
-    return Results.Text($"{timestamp}: {randomId}.\n{pingpongLine}");
+    return Results.Text($"file content: {fileContent} \n env variable: MESSAGE={configMessage} \n {timestamp}: {randomId}.\n{pingpongLine}");
 });
 
 app.Run();
