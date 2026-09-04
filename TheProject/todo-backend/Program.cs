@@ -4,19 +4,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3002";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
+
 // Allow the frontend origin (adjust if you use a different host/port)
+
+var corsOrigins = new[]
+{
+    Environment.GetEnvironmentVariable("CORS_ORIGIN1"),
+    Environment.GetEnvironmentVariable("CORS_ORIGIN2")
+}.OfType<string>().ToArray();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins("http://localhost:8082", "http://localhost:8081")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins(corsOrigins).AllowAnyHeader().AllowAnyMethod());
 });
 
 var app = builder.Build();
-app.UseCors("AllowFrontend");
+app.UseCors();
 
 
 

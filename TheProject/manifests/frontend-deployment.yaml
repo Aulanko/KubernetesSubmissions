@@ -19,9 +19,19 @@ spec:
         - name: todo-frontend
           image: todo-frontend:latest
           imagePullPolicy: Never
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef:
+                name: todo-config
           env:
             - name: PORT
-              value: "3001"
+              valueFrom:
+                configMapKeyRef:
+                  name: todo-config
+                  key: TODO_FRONTEND_PORT
+
+              
               
         
 
