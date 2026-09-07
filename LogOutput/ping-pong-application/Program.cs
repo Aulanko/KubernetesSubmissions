@@ -1,3 +1,4 @@
+using Npgsql;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 var app = builder.Build();
@@ -10,38 +11,55 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-var counter = 0;
-if (File.Exists(filePath))
+var pgHost = Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "postgres";
+var pgDb = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "pingpongdb";
+var pgUser = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "postgres";
+var pgPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "postgres";
+var connectionString = $"Host={pgHost};Username={pgUser};Password={pgPassword};Database={pgDb};Pooling=true;";
+
+using (var adminconn = new Npgsql.NpgsqlConnection(connectionString))
 {
-    var existingLines = File.ReadAllLines(filePath);
-    if (existingLines.Length > 0)
-    {
-        var lastLine = existingLines[^1];
-        var parts = lastLine.Split(':');
-        if (parts.Length == 2 && int.TryParse(parts[1].Trim(), out var restored))
-        {
-            counter = restored;
-        }
-    }
+    adminconn.Open();
+    using var cmd1 = new Npgsql.NpgsqlCommand($"CREATE TABLE IF NOT EXISTS pingpong_counter(key TEXT PRIMARY KEY, value INT);", adminconn);
+    cmd1.ExecuteNonQuery();
+    using var cmd2 = new Npgsql.NpgsqlCommand($"INSERT INTO pingpong_counter(key,value) VALUES('counter',0) ON CONFLICT(key) DO NOTHING;", adminconn);
+    cmd2.ExecuteNonQuery();
 }
+
+
 
 app.MapGet("/pingpong", async (HttpContext ctx) =>
 {
     ctx.Response.Headers.CacheControl = "no-store";
 
-    var newCount = Interlocked.Increment(ref counter);
-    var answer = "pong " + newCount;
+    long newCount;
+    await using (var conn = new Npgsql.NpgsqlConnection(connectionString))
+    {
+        await conn.OpenAsync();
+        using var tx = await conn.BeginTransactionAsync();
+        using var cmd = new Npgsql.NpgsqlCommand($"UPDATE pingpong_counter SET value = value + 1 WHERE key = 'counter' RETURNING value;", conn, tx);
+        var res = await cmd.ExecuteScalarAsync();
+        newCount = res is null ? 0 : Convert.ToInt64(res);
+        await tx.CommitAsync();
 
-    var line = $"Ping / Pongs: {newCount}";
-    await File.AppendAllTextAsync(filePath, line + Environment.NewLine);
+    }
 
-    return answer;
+   
+    return Results.Text($"Ping / Pongs:{newCount}");
 })
 .WithName("pingpong");
 
-app.MapGet("/count", ()=>{
+app.MapGet("/count", async()=>{
+    long current;
+    await using(var conn = new Npgsql.NpgsqlConnection(connectionString))
+    {
+        await conn.OpenAsync();
+        using var cmd = new Npgsql.NpgsqlCommand($"SELECT value FROM pingpong_counter WHERE key = 'counter';", conn);
+        var res = await cmd.ExecuteScalarAsync();
+        current = res is null ? 0 : Convert.ToInt64(res);
+    }
    
-    var current = System.Threading.Volatile.Read(ref counter);
+    
     return Results.Text($"Ping / Pongs:{current}");
 });
 
