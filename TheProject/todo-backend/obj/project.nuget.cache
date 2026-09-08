@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "YJb2/uUoAxY=",
+  "dgSpecHash": "X9dLum4REpM=",
   "success": true,
   "projectFilePath": "/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/todo-backend/todo-backend.csproj",
   "expectedPackageFiles": [
     "/home/leo/.nuget/packages/microsoft.aspnetcore.openapi/10.0.10/microsoft.aspnetcore.openapi.10.0.10.nupkg.sha512",
-    "/home/leo/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+    "/home/leo/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512",
+    "/home/leo/.nuget/packages/npgsql/8.0.3/npgsql.8.0.3.nupkg.sha512"
   ],
   "logs": [
     {

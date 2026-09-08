@@ -13,6 +13,11 @@ data:
   STALE_FLAG_FILE_PATH: "/usr/src/app/counter/image-stale-served"
   CORS_ORIGIN1: "http://localhost:8081"
   CORS_ORIGIN2: "http://localhost:8082"
+  POSTGRES_HOST: "postgres"
+  POSTGRES_DB: "tododb"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgres"
+
 
 
 
