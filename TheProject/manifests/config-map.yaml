@@ -17,6 +17,8 @@ data:
   POSTGRES_DB: "tododb"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "postgres"
+  RANDOM_WIKIPEDIA_URL: "https://en.wikipedia.org/wiki/Special:Random"
+  BACKEND_URL: "http://todo-backend:1234/todo-backend/todos"
 
 
 

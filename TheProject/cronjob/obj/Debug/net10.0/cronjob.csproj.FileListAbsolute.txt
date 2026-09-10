@@ -1,0 +1,15 @@
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/bin/Debug/net10.0/cronjob
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/bin/Debug/net10.0/cronjob.deps.json
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/bin/Debug/net10.0/cronjob.runtimeconfig.json
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/bin/Debug/net10.0/cronjob.dll
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/bin/Debug/net10.0/cronjob.pdb
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.GeneratedMSBuildEditorConfig.editorconfig
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.AssemblyInfoInputs.cache
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.AssemblyInfo.cs
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.csproj.CoreCompileInputs.cache
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.sourcelink.json
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.dll
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/refint/cronjob.dll
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.pdb
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/cronjob.genruntimeconfig.cache
+/home/leo/CodingPrograms/kubernetesHarjoitusta/KubernetesSubmissions/TheProject/cronjob/obj/Debug/net10.0/ref/cronjob.dll

@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjobwiki
+  namespace: project
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: cronjobwiki
+              image: cronjobwiki:latest
+              imagePullPolicy: Never
+              envFrom:
+                - configMapRef:
+                    name: todo-config
+              env:
+                - name: BACKEND_URL
+                  value: "http://todo-backend:1234/todo-backend/todos"
