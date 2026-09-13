@@ -28,3 +28,6 @@ spec:
                 configMapKeyRef:
                   name: todo-config
                   key: TODO_BACKEND_PORT
+          env:
+            - name: Logging__LogLevel__Microsoft.AspNetCore
+              value: "Information"
