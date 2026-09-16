@@ -50,3 +50,5 @@ Chapter 2
 [2.10](https://github.com/Aulanko/KubernetesSubmissions/tree/2.10/TheProject/)
 
 [3.1](https://github.com/Aulanko/KubernetesSubmissions/tree/3.1/LogOutput/)
+
+[3.2](https://github.com/Aulanko/KubernetesSubmissions/tree/3.2/LogOutput/)
