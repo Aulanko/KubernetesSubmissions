@@ -49,6 +49,8 @@ app.MapGet("/pingpong", async (HttpContext ctx) =>
 })
 .WithName("pingpong");
 
+app.MapGet("/healthz", () => Results.Ok("healthy"));
+
 app.MapGet("/count", async()=>{
     long current;
     await using(var conn = new Npgsql.NpgsqlConnection(connectionString))

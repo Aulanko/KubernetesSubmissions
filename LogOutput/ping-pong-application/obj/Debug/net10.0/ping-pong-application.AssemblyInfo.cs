@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ping-pong-application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+163c6f1ae0b524be403ea7f36e80de8acbf95bed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aba648c34b804e9614d1c1e736479549ccdf130f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ping-pong-application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ping-pong-application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

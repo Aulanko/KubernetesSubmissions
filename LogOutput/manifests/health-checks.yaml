@@ -1,0 +1,33 @@
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: pingpong-hc
+  namespace: exercises
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: pingpong-service
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        port: 8080
+        requestPath: /healthz
+---
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: reader-hc
+  namespace: exercises
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: reader-service
+  default:
+    config:
+      type: HTTP
+      httpHealthCheck:
+        port: 3000
+        requestPath: /
