@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: reader
-          image: reader:latest
-          imagePullPolicy: Never
+          image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/reader:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
             

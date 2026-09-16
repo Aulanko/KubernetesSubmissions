@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: pingpong:latest
-          imagePullPolicy: Never
+          image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/pingpong:latest
+          imagePullPolicy: Always
       
           ports:
             - containerPort: 8080
