@@ -28,7 +28,7 @@ using (var adminconn = new Npgsql.NpgsqlConnection(connectionString))
 
 
 
-app.MapGet("/pingpong", async (HttpContext ctx) =>
+app.MapGet("/", async (HttpContext ctx) =>
 {
     ctx.Response.Headers.CacheControl = "no-store";
 

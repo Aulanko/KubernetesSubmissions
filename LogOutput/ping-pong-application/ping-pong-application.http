@@ -1,6 +1,6 @@
 @ping_pong_application_HostAddress = http://localhost:5134
 
-GET {{ping_pong_application_HostAddress}}/pingpong/
+GET {{ping_pong_application_HostAddress}}/
 Accept: application/json
 
 ###
