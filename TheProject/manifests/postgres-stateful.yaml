@@ -15,22 +15,25 @@ spec:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres:13
-        ports:
-        - containerPort: 5432
-        name: postgres
-        envFrom:
-          - configMapRef:
-              name: todo-config
-        volumeMounts:
-          - name: postgres-data
-            mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+              name: postgres
+          envFrom:
+            - configMapRef:
+                name: todo-config
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
   volumeClaimTemplates:
-  - metadata:
-      name: postgres-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi

@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: todo-backend:latest
-          imagePullPolicy: Never
+          image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/todo-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3002
           envFrom:
@@ -28,6 +28,5 @@ spec:
                 configMapKeyRef:
                   name: todo-config
                   key: TODO_BACKEND_PORT
-          env:
             - name: Logging__LogLevel__Microsoft.AspNetCore
               value: "Information"

@@ -13,8 +13,8 @@ spec:
           restartPolicy: Never
           containers:
             - name: cronjobwiki
-              image: cronjobwiki:latest
-              imagePullPolicy: Never
+              image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/cronjobwiki:latest
+              imagePullPolicy: Always
               envFrom:
                 - configMapRef:
                     name: todo-config
