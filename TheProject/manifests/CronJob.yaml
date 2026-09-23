@@ -13,7 +13,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: cronjobwiki
-              image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/cronjobwiki:latest
+              image: cronjobwiki
               imagePullPolicy: Always
               envFrom:
                 - configMapRef:

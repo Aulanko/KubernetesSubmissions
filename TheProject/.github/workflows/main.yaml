@@ -3,7 +3,7 @@ name: Release Application
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: 'read'

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/todo-backend:latest
+          image: todo-backend
           imagePullPolicy: Always
           ports:
             - containerPort: 3002
