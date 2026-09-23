@@ -1,0 +1,83 @@
+name: Release Application
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  REGISTRY: europe-north1-docker.pkg.dev
+  REPOSITORY: dwk-repo
+  BRANCH: ${{ github.ref_name }}
+
+jobs:
+  build-publish-deploy:
+    name: Build, Publish and Deploy
+    runs-on: ubuntu-latest
+    environment: GKE_PROJECT
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.SERVICE_ACCOUNT }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: google-github-actions/setup-gcloud@v3
+
+      - run: gcloud --quiet auth configure-docker $REGISTRY
+
+      - name: 'Get GKE credentials'
+        uses: 'google-github-actions/get-gke-credentials@v3'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ env.PROJECT_ID }}'
+          location: '${{ env.GKE_ZONE }}'
+
+      - name: 'Form image tags'
+        run: |
+          echo "BACKEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/todo-backend:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+          echo "FRONTEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/todo-frontend:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+          echo "CRONJOB_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/cronjobwiki:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+
+      - name: Build backend
+        working-directory: TheProject/todo-backend
+        run: docker build --tag $BACKEND_IMAGE_TAG .
+
+      - name: Build frontend
+        working-directory: TheProject/todo-frontend
+        run: docker build --tag $FRONTEND_IMAGE_TAG .
+
+      - name: Build cronjob
+        working-directory: TheProject/cronjob
+        run: docker build --tag $CRONJOB_IMAGE_TAG .
+
+      - name: Publish images
+        run: |
+          docker push $BACKEND_IMAGE_TAG
+          docker push $FRONTEND_IMAGE_TAG
+          docker push $CRONJOB_IMAGE_TAG
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v3
+
+      - name: Deploy
+        working-directory: TheProject
+        run: |-
+          kustomize edit set image todo-backend=$BACKEND_IMAGE_TAG
+          kustomize edit set image todo-frontend=$FRONTEND_IMAGE_TAG
+          kustomize edit set image cronjobwiki=$CRONJOB_IMAGE_TAG
+          kustomize build . | kubectl apply -f -
+          kubectl rollout status deployment todo-backend -n project
+          kubectl rollout status deployment todo-frontend -n project
+          kubectl get services -n project -o wide
