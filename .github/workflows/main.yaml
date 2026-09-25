@@ -68,16 +68,31 @@ jobs:
           docker push $FRONTEND_IMAGE_TAG
           docker push $CRONJOB_IMAGE_TAG
 
+      - name: Determine target namespace
+        run: |
+          if [[ "$BRANCH" == "master" ]]; then
+            echo "TARGET_NAMESPACE=project" >> $GITHUB_ENV
+          else
+            echo "TARGET_NAMESPACE=$BRANCH" >> $GITHUB_ENV
+          fi
+
+
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v3
 
       - name: Deploy
         working-directory: TheProject
         run: |-
+
+
+          kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f -
+          kustomize edit set namespace ${TARGET_NAMESPACE}
+
           kustomize edit set image todo-backend=$BACKEND_IMAGE_TAG
           kustomize edit set image todo-frontend=$FRONTEND_IMAGE_TAG
           kustomize edit set image cronjobwiki=$CRONJOB_IMAGE_TAG
+
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment todo-backend -n project
-          kubectl rollout status deployment todo-frontend -n project
-          kubectl get services -n project -o wide
+          kubectl rollout status deployment todo-backend -n ${TARGET_NAMESPACE}
+          kubectl rollout status deployment todo-frontend -n ${TARGET_NAMESPACE}
+          kubectl get services -n ${TARGET_NAMESPACE} -o wide
