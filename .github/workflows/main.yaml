@@ -2,8 +2,7 @@ name: Release Application
 
 on:
   push:
-    branches:
-      - master
+    
 
 permissions:
   contents: 'read'
@@ -85,7 +84,7 @@ jobs:
         run: |-
 
 
-          kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create namespace "$TARGET_NAMESPACE" --dry-run=client -o yaml | kubectl apply -f -
           kustomize edit set namespace ${TARGET_NAMESPACE}
 
           kustomize edit set image todo-backend=$BACKEND_IMAGE_TAG
