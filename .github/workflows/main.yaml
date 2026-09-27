@@ -2,6 +2,7 @@ name: Release Application
 
 on:
   push:
+    - '**'
     
 
 permissions:
