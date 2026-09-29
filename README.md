@@ -64,3 +64,21 @@ Chapter 2
 [3.7](https://github.com/Aulanko/KubernetesSubmissions/tree/3.7)
 
 [3.8](https://github.com/Aulanko/KubernetesSubmissions/tree/3.8/.github/workflows)
+
+
+[3.9](https://github.com/Aulanko/KubernetesSubmissions/tree/3.9)
+
+| Aspect | Cloud SQL (DBaaS) | DIY on PVC |
+| :--- | :--- | :--- |
+| **Setup effort** | Low, but needs Auth Proxy or private IP plus IAM | Medium: StatefulSet, PVC, Secret, Service |
+| **Baseline cost** | Higher: instance runs and bills continuously, and HA roughly doubles it | Low: disk plus existing node capacity |
+| **Maintenance** | Low: Google handles patching, storage growth, and monitoring | High: patching, upgrades, monitoring, and recovery are on you |
+| **High availability** | Built in (a setting) | Depends on how you build it (replication, operator, regional disks) |
+| **Backups** | Automated daily backups and point-in-time recovery, restored via console or gcloud | pg_dump CronJob to a bucket or VolumeSnapshots. It's manual to set up, and restores must be tested |
+| **Control** | Limited (no superuser, restricted extensions and flags) | Full |
+| **Portability** | GCP vendor lock-in | Runs wherever Kubernetes runs |
+| **Local/prod parity** | Poor | Excellent |
+
+Cloud SQL is the choice if the team is small and data matters. Less dev resources needed for Database administration, less complex.
+
+DIY on PVC fits better for learning purposes and cost sensitive projects, where you want full control and portability. Here is would good to have someone responsible operating the postgres and a tested backup routine.	
