@@ -13,7 +13,7 @@ resources:
   - manifests/frontend-deployment.yaml
   - manifests/frontend-service.yaml
 
-  
+  - manifests/DB-Backup-CronJob.yaml
 
   - manifests/ingress.yaml
   - manifests/CronJob.yaml

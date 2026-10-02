@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: project
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: postgres-backup
+              image: gcr.io/google.com/cloudsdktool/google-cloud-cli:alpine
+              envFrom:
+                - configMapRef:
+                    name: todo-config
+              env:
+                - name: BUCKET_NAME
+                  value: "dwk-gke-508706-todo-backups"
+                - name: GOOGLE_APPLICATION_CREDENTIALS
+                  value: /secrets/key.json
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  set -e
+                  apk add --no-cache postgresql-client
+                  export PGPASSWORD="$POSTGRES_PASSWORD"
+                  TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+                  FILENAME="tododb-backup-$TIMESTAMP.sql.gz"
+                  pg_dump -h "$POSTGRES_HOST" -U "$POSTGRES_USER" -d "$POSTGRES_DB" | gzip > "/tmp/$FILENAME"
+                  gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+                  gcloud storage cp "/tmp/$FILENAME" "gs://$BUCKET_NAME/$FILENAME"
+              volumeMounts:
+                - name: storage-key
+                  mountPath: /secrets
+                  readOnly: true
+          volumes:
+            - name: storage-key
+              secret:
+                secretName: storage-sa-key
