@@ -22,6 +22,15 @@ spec:
                   value: "dwk-gke-508706-todo-backups"
                 - name: GOOGLE_APPLICATION_CREDENTIALS
                   value: /secrets/key.json
+
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+                  
               command: ["/bin/sh", "-c"]
               args:
                 - |

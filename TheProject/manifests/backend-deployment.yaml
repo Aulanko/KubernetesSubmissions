@@ -30,3 +30,11 @@ spec:
                   key: TODO_BACKEND_PORT
             - name: Logging__LogLevel__Microsoft.AspNetCore
               value: "Information"
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi

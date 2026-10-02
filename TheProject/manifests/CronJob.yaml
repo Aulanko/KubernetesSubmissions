@@ -21,3 +21,12 @@ spec:
               env:
                 - name: BACKEND_URL
                   value: "http://todo-backend:1234/todo-backend/todos"
+            
+
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 32Mi
+                limits:
+                  cpu: 200m
+                  memory: 64Mi
