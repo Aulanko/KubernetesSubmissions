@@ -82,3 +82,6 @@ Chapter 2
 Cloud SQL is the choice if the team is small and data matters. Less dev resources needed for Database administration, less complex.
 
 DIY on PVC fits better for learning purposes and cost sensitive projects, where you want full control and portability. Here is would good to have someone responsible operating the postgres and a tested backup routine.	
+
+
+[3.10](https://github.com/Aulanko/KubernetesSubmissions/tree/3.10/TheProject/)
