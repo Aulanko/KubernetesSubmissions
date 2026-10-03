@@ -88,5 +88,5 @@ DIY on PVC fits better for learning purposes and cost sensitive projects, where 
 
 [3.11](https://github.com/Aulanko/KubernetesSubmissions/tree/3.11/TheProject/manifests)
 
-[3.12]
+[3.12] (https://github.com/Aulanko/KubernetesSubmissions/tree/3.12)
 ![3.12](image-1.png)
