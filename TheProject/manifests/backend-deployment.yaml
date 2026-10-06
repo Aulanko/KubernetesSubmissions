@@ -30,6 +30,26 @@ spec:
                   key: TODO_BACKEND_PORT
             - name: Logging__LogLevel__Microsoft.AspNetCore
               value: "Information"
+          
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
 
           resources:
             requests:

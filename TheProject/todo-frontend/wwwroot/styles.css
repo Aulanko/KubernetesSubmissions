@@ -27,3 +27,20 @@ button:disabled { background: #9fc1ff; cursor: default; }
 .meta { font-size: 13px; color: #666; margin-top: 8px; }
 ul.todo-list { margin: 12px 0 0 0; padding-left: 18px; }
 ul.todo-list li { margin: 6px 0; }
+
+.failure-banner {
+  background: #c0392b;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+.break-section {
+  margin-top: 20px;
+  text-align: right;
+}
+#breakBtn {
+  background: #c0392b;
+}

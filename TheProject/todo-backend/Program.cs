@@ -5,6 +5,8 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var isHealthy = true;
+
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3002";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
@@ -89,6 +91,33 @@ app.MapPost("/todo-backend/todos", async (HttpContext ctx) => {
     }
     catch {
         return Results.BadRequest(new { error = "catch method catched an error, probably invalid JSON" });
+    }
+});
+
+
+
+app.MapPost("/todo-backend/break", () =>
+{
+    isHealthy = false;
+    return Results.Ok(new { status = "broken" });
+});
+
+app.MapGet("/healthz", async () =>
+{
+    if (!isHealthy)
+    {
+        return Results.StatusCode(503);
+    }
+
+    try
+    {
+        await using var conn = new NpgsqlConnection(connectionString);
+        await conn.OpenAsync();
+        return Results.Ok("healthy");
+    }
+    catch
+    {
+        return Results.StatusCode(503);
     }
 });
 

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Todo App</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Todo App</h1>
+
+    <div id="failureBanner" class="failure-banner" style="display:none;">
+      System failure. The todo app is unhealthy. Please wait for recovery.
+    </div>
 
     <div class="image-wrap">
       <img src="/image" alt="Random image">
@@ -23,6 +27,10 @@
 
     <h2>Todos</h2>
     <ul class="todo-list" id="todoList"></ul>
+
+    <div class="break-section">
+      <button id="breakBtn">Break the app</button>
+    </div>
   </div>
 
   <script src="script.js"></script>

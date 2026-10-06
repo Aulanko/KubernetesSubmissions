@@ -65,4 +65,26 @@
   input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sendTodo(); } });
 
   loadTodos();
+
+  const breakBtn = document.getElementById('breakBtn');
+  const banner = document.getElementById('failureBanner');
+
+  breakBtn.addEventListener('click', async () => {
+    try {
+      await fetch(BACKEND + '/break', { method: 'POST' });
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
+  async function pollHealth() {
+    try {
+      const res = await fetch('/healthz');
+      banner.style.display = res.ok ? 'none' : 'block';
+    } catch {
+      banner.style.display = 'block';
+    }
+  }
+  setInterval(pollHealth, 3000);
+  pollHealth();
 })();

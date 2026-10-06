@@ -99,4 +99,18 @@ async Task FetchAndReplaceImage()
     finally { fetchLock.Release(); }
 }
 
+
+app.MapGet("/healthz", async () =>
+{
+    try
+    {
+        var resp = await http.GetAsync("http://todo-backend:1234/healthz");
+        return resp.IsSuccessStatusCode ? Results.Ok("healthy") : Results.StatusCode(503);
+    }
+    catch
+    {
+        return Results.StatusCode(503);
+    }
+});
+
 app.Run();

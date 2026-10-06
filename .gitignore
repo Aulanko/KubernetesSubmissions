@@ -1,2 +1,3 @@
 .sops.yaml
 secret.yamlkey.json
+build-and-push.sh
