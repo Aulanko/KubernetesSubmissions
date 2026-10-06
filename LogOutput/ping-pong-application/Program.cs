@@ -49,7 +49,19 @@ app.MapGet("/", async (HttpContext ctx) =>
 })
 .WithName("pingpong");
 
-app.MapGet("/healthz", () => Results.Ok("healthy"));
+app.MapGet("/healthz", async () =>
+{
+    try
+    {
+        await using var conn = new NpgsqlConnection(connectionString);
+        await conn.OpenAsync();
+        return Results.Ok("healthy");
+    }
+    catch
+    {
+        return Results.StatusCode(503);
+    }
+});
 
 app.MapGet("/count", async()=>{
     long current;

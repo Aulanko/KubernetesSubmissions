@@ -35,4 +35,17 @@ app.MapGet("/", async () =>
     return Results.Text($"file content: {fileContent} \n env variable: MESSAGE={configMessage} \n {timestamp}: {randomId}.\n{pingpongLine}");
 });
 
+app.MapGet("/healthz", async () =>
+{
+    try
+    {
+        var resp = await http.GetAsync("http://pingpong-service:2345/count");
+        return resp.IsSuccessStatusCode ? Results.Ok("healthy") : Results.StatusCode(503);
+    }
+    catch
+    {
+        return Results.StatusCode(503);
+    }
+});
+
 app.Run();

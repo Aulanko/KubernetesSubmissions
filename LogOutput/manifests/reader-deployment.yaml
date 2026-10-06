@@ -31,6 +31,15 @@ spec:
               - name: config-volume
                 mountPath: /etc/config-volume
                 readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
       volumes:
         - name: config-volume
           configMap:

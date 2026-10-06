@@ -17,10 +17,17 @@ spec:
         - name: pingpong
           image: europe-north1-docker.pkg.dev/dwk-gke-508706/dwk-repo/pingpong:latest
           imagePullPolicy: Always
-      
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: pingpong-config
-      
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
