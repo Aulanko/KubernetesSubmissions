@@ -94,3 +94,5 @@ DIY on PVC fits better for learning purposes and cost sensitive projects, where 
 
 
 [4.1](https://github.com/Aulanko/KubernetesSubmissions/tree/4.1/LogOutput/)
+
+[4.2](https://github.com/Aulanko/KubernetesSubmissions/tree/4.2/TheProject/)
