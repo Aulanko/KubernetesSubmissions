@@ -102,3 +102,5 @@ DIY on PVC fits better for learning purposes and cost sensitive projects, where 
 ![alt text](image-2.png)
 
 ![alt text](image-3.png)
+
+[4.4](https://github.com/Aulanko/KubernetesSubmissions/tree/4.4/LogOutput/manifests)
